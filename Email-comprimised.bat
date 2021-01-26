@@ -44,7 +44,7 @@ powershell "Import-Csv C:\Temp\logins11.csv | sort affected_email_address -Uniqu
 call :filter
 
 echo Update Google Sheet and Email
-::gam user fsisd.gam@fsisd.net update drivefile id "Sheet ID" newfilename "Sheet name" localfile C:\Temp\logins16.csv csvsheet id:<Tab ID>
+::gam user <GAM account> update drivefile id "Sheet ID" newfilename "Sheet name" localfile C:\Temp\logins16.csv csvsheet id:<Tab ID>
 for /f %%i in ("C:\Temp\logins16.csv") do set size=%%~zi
 if %size% gtr 0 powershell -file "<Path to >\email-compromised.ps1"
 exit /b
@@ -71,10 +71,10 @@ set time=%2
 
 ::call :psfile
 ::Filter out our IP Address and header since it is out of place
-::if %ipaddress% EQU "69.94.180.21" goto :eof
+::if %ipaddress% EQU "Your external IP address" goto :eof
 ::if /i %name% EQU "name" goto :eof
 :psfile
-::powershell -File "\\fsisddc04\c$\Users\Administrator.FSISD\Desktop\Compromised Accounts\Test.ps1" %ipaddress%
+::powershell -File "<Path to >\Test.ps1" %ipaddress%
 ::for /f "tokens=1-3 skip=1 delims=;" %%a in (C:\Temp\temp2.csv) do set city=%%c && set country=%%a && set google=%%b
 
 gam report useraccounts user %email1% event password_edit>C:\Temp\password-audit2.csv
