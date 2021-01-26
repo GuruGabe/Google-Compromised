@@ -1,12 +1,12 @@
 ﻿$smtp = "smtp.gmail.com" # This is your SMTP Server
-$to1 = "gabriel.clifton@fsisd.net" # This is the recipient smtp address 1
-$to2 = "chris.terry@fsisd.net" # This is the recipient smtp address 2
-$to3 = "debra.ezell@fsisd.net" # This is the recipient smtp address 3
+$to1 = "<recipient 1 email address>" # This is the recipient smtp address 1
+$to2 = "<recipient 2 email address>" # This is the recipient smtp address 2
+$to3 = "<recipient 3 email address>" # This is the recipient smtp address 3
 
-$smtpUsername = "server.reports@fsisd.net"  
-$smtpPassword = "S8<R&RrQ"  
+$smtpUsername = "gmail smtp username"  
+$smtpPassword = "smtp account password"  
 $credentials = new-object Management.Automation.PSCredential $smtpUsername, ($smtpPassword | ConvertTo-SecureString -AsPlainText -Force)
-$from = "<Alert@fsisd.net>" # This will be the sender's address
+$from = "<Alert@domain.com>" # This will be the sender's address
 $subject = "Accounts Google reported compromised"
 
 Import-Csv C:\Temp\logins16.csv | Select -Skip 1 | % {$_.time = ([datetime]($_.time)).ToString('MM/dd/yyyy');$_} | % {$_.password_set = ([datetime]($_.password_set)).ToString('MM/dd/yyyy');$_} | % {$_."last_login" = ([datetime]($_."last_login")).ToString('MM/dd/yyyy');$_} | Sort-Object { $_."email_address" } | Sort-Object { $_."time" } | Sort-Object { $_."password_set" } | Sort-Object { $_."last_login" } -Descending | Export-Csv C:\Temp\logins17.csv -NoTypeInformation
@@ -96,11 +96,10 @@ $report |
 ConvertTo-Html -Head $header | 
 Out-File C:\Temp\compromised.html
 
-$body1 = '<a href="https://docs.google.com/spreadsheets/d/1IaGdVQNRxjiSzfylCB_2UOF0PiUgs4pFQUF7IvTrQyU/edit#gid=2123204598">Link to Google Sheet with full details</a>'
+$body1 = '<a href="https://docs.google.com/spreadsheets/d/<Sheet ID>/edit#gid=<Tab ID>">Link to Google Sheet with full details</a>'
 #$body1 = $ExecutionContext.InvokeCommand.ExpandString($body1)
 $body2 = "<br /><br />"
 $body3 = Get-Content C:\Temp\compromised.html | Out-String
 $body = "$body1 $body2 $body3"
 
-send-MailMessage -SmtpServer $smtp -Port 587 -UseSsl -Credential $credentials -To $to1 -From $from -Subject $subject -Body $body -BodyAsHtml -Priority high
-#, $to2, $to3
+send-MailMessage -SmtpServer $smtp -Port 587 -UseSsl -Credential $credentials -To $to1, $to2, $to3 -From $from -Subject $subject -Body $body -BodyAsHtml -Priority high
