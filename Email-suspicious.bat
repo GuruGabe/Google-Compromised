@@ -46,7 +46,7 @@ powershell "Import-Csv C:\Temp\logins33.csv | sort name,actor.callerType,actor.e
 call :filter
 
 echo Update Google Sheet and Email
-::gam user fsisd.gam@fsisd.net update drivefile id "<Sheet ID>" newfilename "Sheet Name" localfile C:\Temp\logins36.csv csvsheet id:<Tab ID>
+::gam user <GAM Account> update drivefile id "<Sheet ID>" newfilename "Sheet Name" localfile C:\Temp\logins36.csv csvsheet id:<Tab ID>
 for /f %%i in ("C:\Temp\logins36.csv") do set size=%%~zi
 if %size% gtr 0 powershell -file "<Path to >\email-compromised.ps1"
 exit /b
