@@ -11,3 +11,5 @@ And various helper scripts.
 For all of my reports, I use the same Google sheet utilizing different tabs. I further went into making the information that was uploaded into a "Working" tab and had "Main" sheets that pulled the data from the working sheets and formated them with conditional formatting for things like logins from countries not in the US and color coded for X days since last login and since you filtered out your external IP, it will be x days since last login not on your network.
 
 I am aware that some things are reduntant between scripts and actually useless in particular scripts. I created these in a hurry using the prior for the basis of current.
+
+I am new to Github so bear with me.
