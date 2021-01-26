@@ -46,9 +46,9 @@ powershell "Import-Csv C:\Temp\logins33.csv | sort name,actor.callerType,actor.e
 call :filter
 
 echo Update Google Sheet and Email
-::gam user fsisd.gam@fsisd.net update drivefile id "1IaGdVQNRxjiSzfylCB_2UOF0PiUgs4pFQUF7IvTrQyU" newfilename "FSISD Accounts" localfile C:\Temp\logins36.csv csvsheet id:1978614253
+::gam user fsisd.gam@fsisd.net update drivefile id "<Sheet ID>" newfilename "Sheet Name" localfile C:\Temp\logins36.csv csvsheet id:<Tab ID>
 for /f %%i in ("C:\Temp\logins36.csv") do set size=%%~zi
-if %size% gtr 0 powershell -file "C:\Users\Administrator.FSISD\Desktop\Compromised Accounts\email-compromised.ps1"
+if %size% gtr 0 powershell -file "<Path to >\email-compromised.ps1"
 exit /b
 
 :next
@@ -82,7 +82,7 @@ set suspicious=%6
 set login_type=%7
 
 ::Filter out our IP Address and header since it is out of place
-if %ipaddress% EQU "69.94.180.21" goto :eof
+if %ipaddress% EQU "Your external IP address" goto :eof
 if /i %name% EQU "name" goto :eof
 
 echo %name:"=%,%email1:"=%,%email2:"=%,%time:"=%,%ipaddress:"=%,%suspicious:"=%,%login_type:"=%>>C:\Temp\logins36.csv
