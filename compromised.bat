@@ -49,7 +49,7 @@ powershell "Import-Csv C:\Temp\logins3.csv | sort name,actor.callerType,actor.em
 call :filter
 
 ::Update Google Sheet
-gam user fsisd.gam@fsisd.net update drivefile id "1IaGdVQNRxjiSzfylCB_2UOF0PiUgs4pFQUF7IvTrQyU" newfilename "FSISD Accounts" localfile C:\Temp\logins6.csv csvsheet id:1029841262
+gam user <GAM account> update drivefile id "<Sheet ID>" newfilename "Sheet Name" localfile C:\Temp\logins6.csv csvsheet id:<Tab ID>
 exit /b
 
 :next
@@ -86,7 +86,7 @@ set suspicious=%6
 set login_type=%7
 
 ::Filter out our internet IP Address and CSV header since it is now out of place
-if %ipaddress% EQU "69.94.180.21" goto :eof
+if %ipaddress% EQU "Your external IP address" goto :eof
 if /i %name% EQU "name" goto :eof
 
 ::Use GAM to get last password change information for compromised accounts
@@ -94,7 +94,7 @@ gam report useraccounts user %email1% event password_edit>C:\Temp\password-audit
 
 :psfile
 ::Use Powershell to take the IP addresses in the CSV and use it in an API to grab the login location
-powershell -File "\\fsisddc04\c$\Users\Administrator.FSISD\Desktop\Compromised Accounts\Test.ps1" %ipaddress%
+powershell -File "<Path to >\Test.ps1" %ipaddress%
 ::Create the final variables to put into CSV
 for /f "tokens=1-3 skip=1 delims=;" %%a in (C:\Temp\temp.csv) do set city=%%c && set country=%%a && set google=%%b
 for /f "tokens=7 skip=1 delims=," %%g in (C:\Temp\password-audit.csv) do set password_set=%%g
