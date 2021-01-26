@@ -1,11 +1,11 @@
 # Google-Compromised
-Create a Google Sheet and email with details about accounts Google has flagged compromised. Please feel free to help me make this more for any platform. My goal would be for anyone to use this from any type of device. Possibly even combining all of the scripts into one for each platform. Since this is such an important thing to utilize, it should be free for all to use and credit should always be given where credit is due.
+Create a Google Sheet and email with details about accounts Google has flagged compromised. Please feel free to help me make this more for any platform. My goal would be for anyone to use this from any type of device. Possibly even combining all of the scripts into one for each platform. Since this is such an important thing to utilize, it should be free for all to use and credit should always be given where credit is due. Google Admin Console can give you some of these reports, but this will allow you to create shared sheets with this information and even email so that your higher ups do not need access to Admin Console or even require you to pull the reports to send to them. I have these reports running with a scheduled task on one of my servers so I can get a daily report as to what is happening with our Gmail accounts. With this report, I was able to easily see different details about the account and went to haveibeenpwnd.com with these accounts and found that most of the accounts were from an "educational" site that got compromised. Wish I had a haveibeenpwnd.com API key so I could integrate that as well, giving the site that was breached in the report.
+
+Thank you so much Ross for dealing with my questions to help me get GAMADV to create these great reports.
 
 I started with compromised.bat. This script will use GAM, I used GAMADV and not sure if you need ADV or not for this to run properly. I would use GAMADV anyway.
+Email-compromised.bat will email you a report for the accounts
+suspicious.bat will create a sheet which Google reported suspicious.
+And various helper scripts.
 
-Compromised.bat
-I have mine set to grab the date of June 01 of current school year. For me this is after the prior school year ended so I am starting fresh for the summer until school ends. Adjust to you needs.
-I then remove all prior "working" CSV files an create the headers for the new CSV to be uploaded.
-
-Next, use GAM to grab all accounts Google has reported as compromised since <date>. I then use powershell to remove all duplicate email addresses since I only need to parse them once. I'll read through the CSV and create variables for the next step.
-Filter out your internet facing IP address because you really only want to know where students are logging in outside your district.
+For all of my reports, I use the same Google sheet utilizing different tabs. I further went into making the information that was uploaded into a "Working" tab and had "Main" sheets that pulled the data from the working sheets and formated them with conditional formatting for things like logins from countries not in the US and color coded for X days since last login and since you filtered out your external IP, it will be x days since last login not on your network.
