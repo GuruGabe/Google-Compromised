@@ -13,3 +13,5 @@ For all of my reports, I use the same Google sheet utilizing different tabs. I f
 I am aware that some things are reduntant between scripts and actually useless in particular scripts. I created these in a hurry using the prior for the basis of current.
 
 I am new to Github so bear with me.
+
+Any issues you see or any suggestions please email me gabriel.clifton@fsisd.net
