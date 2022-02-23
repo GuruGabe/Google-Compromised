@@ -14,4 +14,5 @@ I am aware that some things are reduntant between scripts and actually useless i
 
 I am new to Github so bear with me.
 
-Any issues you see or any suggestions please email me gabriel.clifton@fsisd.net
+Any issues you see or any suggestions please email me gurugabe@gmail.com
+Make sure you let me know in the subject that you are referencing this so I don't delete the email immediately.
