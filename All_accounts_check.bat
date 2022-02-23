@@ -104,7 +104,7 @@ powershell -File "<File Location>\all_accounts.ps1"
 powershell "Rename-Item C:\Temp\All_logins4.csv C:\Temp\All_logins4.csv.old"
 powershell "Import-CSV C:\Temp\All_logins4.csv.old | Sort-Object email_address,time,IP_Address -Unique | Export-Csv -Path C:\Temp\All_logins4.csv -NoTypeInformation"
 call :next2
-gam user fsisd.gam@fsisd.net update drivefile id "11hHtmHzRfGKHMWVvjGWQnaGPbHTuJXxeXoEt5AMWQFw" newfilename "Account location logs" localfile C:\Temp\All_logins4.csv csvsheet id:280095572
+gam user fsisd.gam@fsisd.net update drivefile id "<Google Sheet>" newfilename "Account location logs" localfile C:\Temp\All_logins4.csv csvsheet id:<Sheet Tab ID>
 exit /b
 
 
